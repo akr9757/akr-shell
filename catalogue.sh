@@ -16,3 +16,4 @@ systemctl enable catalogue
 systemctl start catalogue
 dnf install mongodb-org-shell -y
 mongo --host mongodb.akrdevopsb72.online </app/schema/catalogue.js
+systemctl restart catalogue
