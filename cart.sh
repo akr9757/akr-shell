@@ -1,6 +1,7 @@
 dnf module disable nodejs -y
 dnf module enable nodejs:18 -y
 dnf install nodejs -y
+cp /home/centos/akr-shell/cart.service /etc/systemd/system/cart.service
 useradd roboshop
 rm -rf /app
 mkdir /app
@@ -9,7 +10,7 @@ cd /app
 unzip /tmp/cart.zip
 cd /app
 npm install
-cp /home/centos/akr-shell/cart.service /etc/systemd/system/cart.service
+
 
 systemctl daemon-reload
 systemctl enable cart
