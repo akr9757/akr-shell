@@ -1,8 +1,8 @@
 dnf module disable nodejs -y
 dnf module enable nodejs:18 -y
 dnf install nodejs -y
-cp mongo.repo /etc/yum.repos.d/mongo.repo
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp /home/centos/akr-shell/mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/akr-shell/catalogue.service /etc/systemd/system/catalogue.service
 useradd roboshop
 rm -rf app
 mkdir /app
