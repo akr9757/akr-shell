@@ -1,5 +1,5 @@
 dnf install maven -y
-cp /home/centos/akr-shell/shipping.servivce /etc/systemd/system/shipping.service
+cp /home/centos/akr-shell/shipping.service /etc/systemd/system/shipping.service
 useradd roboshop
 rm -rf /app
 mkdir /app
