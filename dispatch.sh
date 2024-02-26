@@ -1,5 +1,7 @@
 dnf install golang -y
 useradd roboshop
+cp /home/centos/akr-shell/dispatch.service /etc/systemd/system/dispatch.service
+rm -rf /app
 mkdir /app
 curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip
 cd /app
