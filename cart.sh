@@ -1,6 +1,7 @@
+script=$(realpath "$0")
+echo ${script}
 source common.sh
 echo ${app_user}
-pwd
 exit
 
 echo -e "\e[32m>>>>>>>>>>> Disable Default Version <<<<<<<<<<<<<\e[0m"
