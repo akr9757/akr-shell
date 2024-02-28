@@ -1,5 +1,5 @@
 source common.sh
-useradd ${app_user}
+echo ${app_user}
 pwd
 exit
 
