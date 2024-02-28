@@ -17,6 +17,7 @@ dnf install mysql-community-server -y
 
 echo -e "\e[32m>>>>>>>>>>> Set Mysql Password <<<<<<<<<<<<<\e[0m"
 mysql_secure_installation --set-root-pass ${mysql_root_password}
+mysql -uroot -pRoboShop@1
 
 echo -e "\e[32m>>>>>>>>>>> Start Mysql <<<<<<<<<<<<<\e[0m"
 systemctl enable mysqld
