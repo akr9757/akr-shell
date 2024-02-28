@@ -8,7 +8,7 @@ if [ -z "$mysql_root_password" ]; then
   exit 1
 fi
 
-echo -i -e "\e[32m>>>>>>>>>>> Install Maven <<<<<<<<<<<<<\e[0m"
+echo -e "\e[32m>>>>>>>>>>> Install Maven <<<<<<<<<<<<<\e[0m"
 dnf install maven -y
 
 echo -e "\e[32m>>>>>>>>>>> Copy Shipping Service File <<<<<<<<<<<<<\e[0m"
