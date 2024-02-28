@@ -1,8 +1,12 @@
+script=$(realpath "$0")
+script_path=$(dirname "${script}")
+source ${script_path}/common.sh
+
 echo -e "\e[32m>>>>>>>>>>> Install Nginx <<<<<<<<<<<<<\e[0m"
 dnf install nginx -y
 
 echo -e "\e[32m>>>>>>>>>>> Copy Roboshop Conf <<<<<<<<<<<<<\e[0m"
-cp roboshop.conf /etc/nginx/default.d/roboshop.conf
+cp ${script_path}/roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 echo -e "\e[32m>>>>>>>>>>> Remove Default Content <<<<<<<<<<<<<\e[0m"
 rm -rf /usr/share/nginx/html/*

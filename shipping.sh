@@ -1,8 +1,18 @@
-echo -e "\e[32m>>>>>>>>>>> Install Maven <<<<<<<<<<<<<\e[0m"
+script=$(realpath "$0")
+script_path=$(dirname "${script}")
+source ${script_path}/common.sh
+mysql_root_password=$1
+
+if [ -z "$mysql_root_password" ]; then
+  echo input mysql root password is missing
+  exit 1
+fi
+
+echo -i -e "\e[32m>>>>>>>>>>> Install Maven <<<<<<<<<<<<<\e[0m"
 dnf install maven -y
 
 echo -e "\e[32m>>>>>>>>>>> Copy Shipping Service File <<<<<<<<<<<<<\e[0m"
-cp /home/centos/akr-shell/shipping.service /etc/systemd/system/shipping.service
+cp ${script_path}/shipping.service /etc/systemd/system/shipping.service
 
 echo -e "\e[32m>>>>>>>>>>> Add Application User <<<<<<<<<<<<<\e[0m"
 useradd ${app_user}
@@ -24,7 +34,7 @@ echo -e "\e[32m>>>>>>>>>>> Install Mysql Client <<<<<<<<<<<<<\e[0m"
 dnf install mysql -y
 
 echo -e "\e[32m>>>>>>>>>>> Load Schema <<<<<<<<<<<<<\e[0m"
-mysql -h mysql.akrdevopsb72.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
+mysql -h mysql.akrdevopsb72.online -uroot -p${mysql_root_password} < /app/schema/shipping.sql
 
 echo -e "\e[32m>>>>>>>>>>> Start Shipping Service <<<<<<<<<<<<<\e[0m"
 systemctl daemon-reload

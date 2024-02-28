@@ -1,3 +1,7 @@
+script=$(realpath "$0")
+script_path=$(dirname "${script}")
+source ${script_path}/common.sh
+
 echo -e "\e[32m>>>>>>>>>>> Disable Default Version <<<<<<<<<<<<<\e[0m"
 dnf module disable nodejs -y
 
@@ -6,10 +10,10 @@ dnf module enable nodejs:18 -y
 dnf install nodejs -y
 
 echo -e "\e[32m>>>>>>>>>>> Copy Mongo Repo <<<<<<<<<<<<<\e[0m"
-cp /home/centos/akr-shell/mongo.repo /etc/yum.repos.d/mongo.repo
+cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
 
 echo -e "\e[32m>>>>>>>>>>> Copy Catalogue Service <<<<<<<<<<<<<\e[0m"
-cp /home/centos/akr-shell/catalogue.service /etc/systemd/system/catalogue.service
+cp ${script_path}/catalogue.service /etc/systemd/system/catalogue.service
 
 echo -e "\e[32m>>>>>>>>>>> Add Application User <<<<<<<<<<<<<\e[0m"
 useradd ${app_user}
