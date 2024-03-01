@@ -7,7 +7,7 @@ func_print_head() {
   echo -e "\e[32m>>>>>>>>>>> $1 <<<<<<<<<<<<<\e[0m"
 }
 
-func_schem_setup() {
+func_schema_setup() {
   if [ ${schema_setup} == "mongo" ]; then
     func_print_head "Copy Mongo Repo"
     cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
