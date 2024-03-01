@@ -8,17 +8,21 @@ if [ -z "$rabbitmq_appuser_password" ]; then
   exit 1
 fi
 
-echo -e "\e[32m>>>>>>>>>>> Download RabbitMQ <<<<<<<<<<<<<\e[0m"
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+func_print_head "Download RabbitMQ"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>>$log_file
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Install rABBITMQ <<<<<<<<<<<<<\e[0m"
-dnf install rabbitmq-server -y
+func_print_head "Install RABBITMQ"
+dnf install rabbitmq-server -y &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Add Application User <<<<<<<<<<<<<\e[0m"
-rabbitmqctl add_user roboshop ${rabbitmq_appuser_password}
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+func_print_head "Add Application User"
+rabbitmqctl add_user roboshop ${rabbitmq_appuser_password} &>>$log_file
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Start Rabbitmq Service <<<<<<<<<<<<<\e[0m"
-systemctl enable rabbitmq-server
-systemctl restart rabbitmq-server
+func_print_head "Start Rabbitmq Service"
+systemctl enable rabbitmq-server &>>$log_file
+systemctl restart rabbitmq-server &>>$log_file
+func_exit_status $?

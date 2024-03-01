@@ -8,17 +8,20 @@ if [ -z "$mysql_root_password" ]; then
   exit 1
 fi
 
-echo -e "\e[32m>>>>>>>>>>> Copy Mysql Repo <<<<<<<<<<<<<\e[0m"
-cp ${script_path}/mysql.repo /etc/yum.repos.d/mongo.repo
+func_print_head "Copy Mysql Repo"
+cp ${script_path}/mysql.repo /etc/yum.repos.d/mongo.repo &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Install Mysql <<<<<<<<<<<<<\e[0m"
-dnf module disable mysql -y
-dnf install mysql-community-server -y
+func_print_head "Install Mysql"
+dnf module disable mysql -y &>>$log_file
+dnf install mysql-community-server -y &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Set Mysql Password <<<<<<<<<<<<<\e[0m"
-mysql_secure_installation --set-root-pass ${mysql_root_password}
-mysql -uroot -pRoboShop@1
+func_print_head "Set Mysql Password"
+mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Start Mysql <<<<<<<<<<<<<\e[0m"
-systemctl enable mysqld
-systemctl restart mysqld
+func_print_head "Start Mysql"
+systemctl enable mysqld &>>$log_file
+systemctl restart mysqld &>>$log_file
+func_exit_status $?

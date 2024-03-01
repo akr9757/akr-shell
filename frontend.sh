@@ -2,23 +2,29 @@ script=$(realpath "$0")
 script_path=$(dirname "${script}")
 source ${script_path}/common.sh
 
-echo -e "\e[32m>>>>>>>>>>> Install Nginx <<<<<<<<<<<<<\e[0m"
-dnf install nginx -y
+func_print_head "Install Nginx"
+dnf install nginx -y &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Copy Roboshop Conf <<<<<<<<<<<<<\e[0m"
-cp ${script_path}/roboshop.conf /etc/nginx/default.d/roboshop.conf
+func_print_head "Copy Roboshop Conf"
+cp ${script_path}/roboshop.conf /etc/nginx/default.d/roboshop.conf &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Remove Default Content <<<<<<<<<<<<<\e[0m"
-rm -rf /usr/share/nginx/html/*
+func_print_head "Remove Default Content"
+rm -rf /usr/share/nginx/html/* &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Download Frontend Content <<<<<<<<<<<<<\e[0m"
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+func_print_head "Download Frontend Content"
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Unzip Frontend Content <<<<<<<<<<<<<\e[0m"
-cd /usr/share/nginx/html
-unzip /tmp/frontend.zip
+func_print_head "Unzip Frontend Content"
+cd /usr/share/nginx/html &>>$log_file
+unzip /tmp/frontend.zip &>>$log_file
+func_exit_status $?
 
-echo -e "\e[32m>>>>>>>>>>> Start Nginx Service <<<<<<<<<<<<<\e[0m"
-systemctl enable nginx
-systemctl start nginx
-systemctl restart nginx
+func_print_head "Start Nginx Service"
+systemctl enable nginx &>>$log_file
+systemctl start nginx &>>$log_file
+systemctl restart nginx &>>$log_file
+func_exit_status $?
