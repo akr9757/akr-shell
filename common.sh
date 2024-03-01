@@ -27,9 +27,6 @@ func_nodejs() {
   dnf module enable nodejs:18 -y
   dnf install nodejs -y
 
-  func_print_head "Copy Mongo Repo"
-  cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
-
   func_print_head "Copy ${component} Service"
   cp ${script_path}/${component}.service /etc/systemd/system/${component}.service
 
