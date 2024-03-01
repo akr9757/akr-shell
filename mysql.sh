@@ -19,6 +19,7 @@ func_exit_status $?
 
 func_print_head "Set Mysql Password"
 mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$log_file
+mysql -uroot -pRoboShop@1
 func_exit_status $?
 
 func_print_head "Start Mysql"
