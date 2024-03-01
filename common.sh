@@ -34,10 +34,12 @@ func_schema_setup() {
   fi
   if [ "${schema_setup}" == "mysql" ]; then
     func_print_head "Install Mysql Client"
-    dnf install mysql -y
+    dnf install mysql -y &>>$log_file
+    func_exit_status $?
 
     func_print_head "Load Schema"
-    mysql -h mysql.akrdevopsb72.online -uroot -p${mysql_root_password} < /app/schema/${component}.sql
+    mysql -h mysql.akrdevopsb72.online -uroot -p${mysql_root_password} < /app/schema/${component}.sql &>>$log_file
+    func_exit_status $?
   fi
 }
 
