@@ -20,7 +20,6 @@ func_exit_status $?
 func_print_head "Add Application User"
 rabbitmqctl add_user roboshop ${rabbitmq_appuser_password} &>>$log_file
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$log_file
-func_exit_status $?
 
 func_print_head "Start Rabbitmq Service"
 systemctl enable rabbitmq-server &>>$log_file
