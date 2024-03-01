@@ -134,7 +134,7 @@ func_python() {
 
 func_golang() {
   func_print_head "Install Golang"
-  dnf install golang -y
+  dnf install golang -y &>>$log_file
   func_exit_status $?
 
   func_app_prereq
