@@ -49,7 +49,7 @@ func_nodejs() {
 
   func_print_head "Add Application User"
   id ${app_user} &>>$log_file
-  if [ $? -eq 0 ]; then
+  if [ $? -ne 0 ]; then
     useradd ${app_user}
   fi
   func_exit_status $?
