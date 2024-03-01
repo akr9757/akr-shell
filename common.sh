@@ -47,10 +47,10 @@ func_nodejs() {
   func_print_head "Nodejs Dependencies"
   npm install
 
-  func_schema_setup
-
   func_print_head "Start ${component} Service"
   systemctl daemon-reload
   systemctl enable ${component}
   systemctl restart ${component}
+
+  func_schema_setup
 }
