@@ -8,20 +8,26 @@ if [ -z "$rabbitmq_appuser_password" ]; then
   exit 1
 fi
 
-func_print_head "Download RabbitMQ"
+func_print_head "Setup ErLang Repos"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>>$log_file
+func_stat_check $?
+
+func_print_head "Setup RabbitMQ Repos"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>>$log_file
-func_exit_status $?
+func_stat_check $?
 
-func_print_head "Install RABBITMQ"
-dnf install rabbitmq-server -y &>>$log_file
-func_exit_status $?
+func_print_head "Install ErLang & RabbitMQ"
+yum install rabbitmq-server -y &>>$log_file
+func_stat_check $?
 
-func_print_head "Add Application User"
-rabbitmqctl add_user roboshop ${rabbitmq_appuser_password} &>>$log_file
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$log_file
-
-func_print_head "Start Rabbitmq Service"
+func_print_head "Start RabbitMQ Service"
 systemctl enable rabbitmq-server &>>$log_file
 systemctl restart rabbitmq-server &>>$log_file
-func_exit_status $?
+func_stat_check $?
+
+func_print_head "Add Application User in RabbtiMQ"
+rabbitmqctl add_user roboshop ${rabbitmq_appuser_password} &>>$log_file
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$log_file
+func_stat_check $?
+
+

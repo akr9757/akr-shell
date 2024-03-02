@@ -17,12 +17,11 @@ dnf module disable mysql -y &>>$log_file
 dnf install mysql-community-server -y &>>$log_file
 func_exit_status $?
 
-func_print_head "Set Mysql Password"
-mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$log_file
-mysql -uroot -pRoboShop@1
-func_exit_status $?
-
-func_print_head "Start Mysql"
+func_print_head "Start MySQL"
 systemctl enable mysqld &>>$log_file
 systemctl restart mysqld &>>$log_file
-func_exit_status $?
+func_stat_check $?
+
+func_print_head "Reset MySQL Password"
+mysql_secure_installation --set-root-pass $mysql_root_password &>>$log_file
+func_stat_check $?
