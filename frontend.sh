@@ -24,6 +24,6 @@ unzip /tmp/frontend.zip &>>$log_file
 func_exit_status $?
 
 func_print_head "Start Nginx Service"
-systemctl enable nginx &>>$log_file
-systemctl restart nginx &>>$log_file
+systemctl enable nginx
+systemctl restart nginx
 func_exit_status $?
