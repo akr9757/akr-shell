@@ -25,6 +25,5 @@ func_exit_status $?
 
 func_print_head "Start Nginx Service"
 systemctl enable nginx &>>$log_file
-systemctl start nginx &>>$log_file
 systemctl restart nginx &>>$log_file
 func_exit_status $?
