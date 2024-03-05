@@ -29,7 +29,7 @@ func_schema_setup() {
     func_exit_status $?
 
     func_print_head "Load Schema"
-    mongo --host mongodb.akrdevopsb72.online </app/schema/${component}.js &>>$log_file
+    mongo --host mongodb-dev.akrdevopsb72.online </app/schema/${component}.js &>>$log_file
     func_exit_status $?
   fi
   if [ "${schema_setup}" == "mysql" ]; then
@@ -38,7 +38,7 @@ func_schema_setup() {
     func_exit_status $?
 
     func_print_head "Load Schema"
-    mysql -h mysql.akrdevopsb72.online -uroot -p${mysql_root_password} < /app/schema/${component}.sql &>>$log_file
+    mysql -h mysql-dev.akrdevopsb72.online -uroot -p${mysql_root_password} < /app/schema/${component}.sql &>>$log_file
     func_exit_status $?
   fi
 }
