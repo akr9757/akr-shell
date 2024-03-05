@@ -8,7 +8,7 @@ yum install nginx -y &>>$log_file
 func_exit_status $?
 
 func_print_head "Copy roboshop Config file"
-cp cp ${script_path}/roboshop.conf /etc/nginx/default.d/roboshop.conf &>>$log_file
+cp ${script_path}/roboshop.conf /etc/nginx/default.d/roboshop.conf &>>$log_file
 func_exit_status $?
 
 func_print_head "Clean Old App content"
