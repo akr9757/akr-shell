@@ -20,8 +20,8 @@ func_exit_status $?
 func_print_head "Start MySQL"
 systemctl enable mysqld &>>$log_file
 systemctl restart mysqld &>>$log_file
-func_stat_check $?
+func_exit_status $?
 
 func_print_head "Reset MySQL Password"
 mysql_secure_installation --set-root-pass $mysql_root_password &>>$log_file
-func_stat_check $?
+func_exit_status $?
