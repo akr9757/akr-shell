@@ -3,7 +3,7 @@ Description = Cart Service
 [Service]
 User=roboshop
 Environment=REDIS_HOST=redis-dev.akrdevopsb72.online
-Environment=CATALOGUE_HOST=user-dev.akrdevopsb72.online
+Environment=CATALOGUE_HOST=catalogue-dev.akrdevopsb72.online
 Environment=CATALOGUE_PORT=8080
 ExecStart=/bin/node /app/server.js
 SyslogIdentifier=cart
